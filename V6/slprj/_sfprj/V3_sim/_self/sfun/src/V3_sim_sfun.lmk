@@ -1,0 +1,26 @@
+CC     = "C:\Program Files\MATLAB\R2017a\sys\lcc64\lcc64\bin\lcc64.exe"
+LD     = "C:\Program Files\MATLAB\R2017a\sys\lcc64\lcc64\bin\lcclnk64.exe"
+LIBCMD = "C:\Program Files\MATLAB\R2017a\sys\lcc64\lcc64\bin\lcclib64.exe"
+CFLAGS = -dll -noregistrylookup  -c -Zp8 -DLCC_WIN64 -DMATLAB_MEX_FILE -DMX_COMPAT_32 -nodeclspec 
+LDFLAGS = -s -dll -L"C:\Program Files\MATLAB\R2017a\sys\lcc64\lcc64\lib64" -entry LibMain -map sfun.map 
+LIBFLAGS = 
+
+OBJECTS = \
+	"V3_sim_sfun.obj"\
+	"c2_V3_sim.obj"\
+	"V3_sim_sfun_registry.obj"\
+	"lccstub.obj"\
+
+INCLUDE_PATH= -I"C:\Program Files\MATLAB\R2017a\sys\lcc64\lcc64\include64"  -I"C:\Program Files\MATLAB\R2017a\extern\include"  -I"C:\Program Files\MATLAB\R2017a\simulink\include"  -I"C:\Program Files\MATLAB\R2017a\simulink\include\sf_runtime"  -I"C:\Program Files\MATLAB\R2017a\stateflow\c\mex\include"  -I"C:\Program Files\MATLAB\R2017a\rtw\c\src"  -I"C:\Users\bened\Documents\MATLAB\Matlab2\V6\slprj\_sfprj\V3_sim\_self\sfun\src" 
+ 
+
+V3_sim_sfun.mexw64 : $(MAKEFILE) $(OBJECTS)
+	$(LD) $(LDFLAGS) -o V3_sim_sfun.mexw64 @V3_sim_sfun.lmko
+V3_sim_sfun.obj :	"V3_sim_sfun.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "V3_sim_sfun.c"
+c2_V3_sim.obj :	"c2_V3_sim.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "c2_V3_sim.c"
+V3_sim_sfun_registry.obj :	"V3_sim_sfun_registry.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "V3_sim_sfun_registry.c"
+lccstub.obj :	"C:\Program Files\MATLAB\R2017a\sys\lcc64\lcc64\mex\lccstub.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "C:\Program Files\MATLAB\R2017a\sys\lcc64\lcc64\mex\lccstub.c"
